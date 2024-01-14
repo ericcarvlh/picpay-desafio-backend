@@ -16,13 +16,11 @@ public class UserService {
     private UserRepository repository;
 
     public void validadeTransaction(User sender, BigDecimal amout) throws Exception {
-        if (sender.getTypeUser() != TypeUser.MERCHANT) {
+        if (sender.getTypeUser() == TypeUser.MERCHANT)
             throw new Exception("Usuario do tipo Lojista nao esta autorizado a realizar transacao.");
-        }
 
-        if (sender.getBalance().compareTo(amout) < 0) {
+        if (sender.getBalance().compareTo(amout) < 0)
             throw new Exception("Saldo insuficiente.");
-        }
     }
 
     public User findUserByCdUser(Long cdUser) throws Exception {

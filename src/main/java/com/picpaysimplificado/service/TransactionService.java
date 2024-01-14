@@ -27,7 +27,10 @@ public class TransactionService {
     @Autowired
     private RestTemplate restTemplate; // utilizada para simplificar a interacao com servicos
 
-    public void createTransaction(TransactionDTO transactionDTO) throws Exception {
+    @Autowired
+    private NotificationService notificationService;
+
+    public Transaction createTransaction(TransactionDTO transactionDTO) throws Exception {
         User sender = this.userService.findUserByCdUser(transactionDTO.cdSender());
         User receiver = this.userService.findUserByCdUser(transactionDTO.cdReceiver());
 
@@ -45,11 +48,14 @@ public class TransactionService {
         transaction.setTimeStamp(LocalDateTime.now());
 
         sender.setBalance(sender.getBalance().subtract(transactionDTO.value()));
-        sender.setBalance(receiver.getBalance().add(transactionDTO.value()));
+        receiver.setBalance(receiver.getBalance().add(transactionDTO.value()));
 
         this.repository.save(transaction);
         this.userService.saveUser(sender);
         this.userService.saveUser(receiver);
+        this.notificationService.sendNotification();
+
+        return transaction;
     }
 
     public boolean authorizeTransaction(User sender, BigDecimal value) {
