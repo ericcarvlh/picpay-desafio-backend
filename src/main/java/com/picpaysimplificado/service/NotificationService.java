@@ -14,7 +14,7 @@ public class NotificationService {
     @Autowired
     private RestTemplate restTemplate;
 
-    public void sendNotification(User user, String message) throws Exception {
+    public void sendNotification() throws Exception {
         ResponseEntity<Map> responseNotification = restTemplate.getForEntity("https://run.mocky.io/v3/54dc2cf1-3add-45b5-b5a9-6bf7e7f1f4a6", Map.class);
 
         if (!(responseNotification.getStatusCode() == HttpStatus.OK)) {
