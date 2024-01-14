@@ -45,4 +45,8 @@ public class User {
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
+
+    public String getEmail() {
+        return email;
+    }
 }
