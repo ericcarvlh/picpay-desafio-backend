@@ -1,5 +1,6 @@
 package com.picpaysimplificado.service;
 
+import com.picpaysimplificado.DTO.UserDTO;
 import com.picpaysimplificado.domain.user.TypeUser;
 import com.picpaysimplificado.domain.user.User;
 import com.picpaysimplificado.repository.UserRepository;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service // indica que eh uma classe de servico
 public class UserService {
@@ -29,5 +31,15 @@ public class UserService {
 
     public void saveUser(User user) {
         this.repository.save(user);
+    }
+
+    public User createUser(UserDTO userDTO) {
+        User newUser = new User(userDTO);
+        this.saveUser(newUser);
+        return newUser;
+    }
+
+    public List<User> getAllUsers() {
+        return this.repository.findAll();
     }
 }
