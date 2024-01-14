@@ -1,16 +1,13 @@
 package com.picpaysimplificado.domain.user;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 @Entity(name="tbl_users") // representa uma entidade em nossa base de dados
 @Table(name="tbl_users")
-@Getter
+@Getter(AccessLevel.NONE)
 @Setter
 @AllArgsConstructor // construtor para receber todos os parametros da classe
 @EqualsAndHashCode(of="cd_user")
@@ -37,4 +34,11 @@ public class User {
     @Enumerated(EnumType.STRING)
     private TypeUser typeUser;
 
+    public TypeUser getTypeUser() {
+        return typeUser;
+    }
+
+    public BigDecimal getBalance() {
+        return balance;
+    }
 }
