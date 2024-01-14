@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor // construtor para receber todos os parametros da classe
 @EqualsAndHashCode(of="cd_transaction")
-public class transaction {
+public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
